@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.Logout {
+  color: rgba(255,255,255,.5);
+}
+
+.Logout:hover{
+  color: rgba(255,255,255,.7);
+}
