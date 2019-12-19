@@ -1,11 +1,12 @@
 import React from 'react';
 import '../App.css';
+import Searchbar from './Components/Searchbar'
 
 function Catalog() {
     return (
-      <div className="App">
-        <h1>I'm in Catalog Page</h1>
-      </div>
+      <>
+        <Searchbar />
+      </>
     );
   }
   
