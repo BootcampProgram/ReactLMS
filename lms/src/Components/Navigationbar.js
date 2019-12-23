@@ -4,7 +4,7 @@ import { Button, Navbar, Nav, Form, FormControl} from 'react-bootstrap';
 
 function Navigationbar() {
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="dark" variant="dark" className="sticky-top">
         <Navbar.Brand>City School Library</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/">Catalog</Nav.Link>
