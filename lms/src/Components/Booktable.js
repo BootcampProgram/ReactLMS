@@ -4,17 +4,23 @@ import { Table, Button } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { AiTwotoneDelete } from 'react-icons/ai';
 
-function Booktable() {
-
+function Booktable(props) {
+//States
 const [listBooks, setlistBooks] = useState([]);
+
+//Filter books on search string
+var filteredBooks = listBooks.filter(c => 
+    c.title.toLowerCase().includes(props.searchString.toString().toLowerCase()) 
+    || c.isbn.includes(props.searchString));
 
 useEffect(() => {
 
     fetch("https://localhost:44381/api/book")
-    .then(c => c.json())
-    .then(c => {
-        setlistBooks(c)
+    .then(res => res.json())
+    .then(data => {
+        setlistBooks(data)
     })
+
 }, [])
 
     return (
@@ -32,7 +38,7 @@ useEffect(() => {
                 </tr>
             </thead>
             <tbody>
-            {listBooks.map(y => 
+            {filteredBooks.map(y => 
                 <tr key = {y.detailID}>
                     <td>{`BD0${y.detailID}`}</td>
                     <td style={{fontWeight:"bold"}}>{y.title}</td>
@@ -48,6 +54,7 @@ useEffect(() => {
                     )}
             </tbody>
         </Table>
+        {filteredBooks.length === 0 && <h1 className="text-center">Data not Found</h1>}
       </>
     );
   }

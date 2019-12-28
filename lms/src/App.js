@@ -7,7 +7,7 @@ import Students from './Components/Students'
 import Return from './Components/Return'
 import Navigationbar from './Components/Navigationbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router} from 'react-router-dom'
 
 function App() {
   return (
