@@ -3,10 +3,12 @@ import '../App.css';
 import { Table, Button } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { AiTwotoneDelete } from 'react-icons/ai';
+import ViewBooksModal from './Modals/ViewBooksModal'
 
 function Booktable(props) {
 //States
 const [listBooks, setlistBooks] = useState([]);
+const [modalShow, setModalShow] = useState(false);
 
 //Filter books on search string
 var filteredBooks = listBooks.filter(c => 
@@ -45,7 +47,7 @@ useEffect(() => {
                     <td>{y.isbn}</td>
                     <td>{y.shelveCode}</td>
                     <td>{y.availability}</td>
-                    <td><Button variant="success" size="sm">View</Button></td>
+                    <td><Button variant="success" size="sm" onClick={() => setModalShow(true)}>View</Button></td>
                     <td className="text-center">
                         <a href="#bookedit" className="mr-4"><FaEdit /></a>
                         <a href="#bookdelete"><AiTwotoneDelete /></a>
@@ -55,6 +57,7 @@ useEffect(() => {
             </tbody>
         </Table>
         {filteredBooks.length === 0 && <h1 className="text-center">Data not Found</h1>}
+        <ViewBooksModal show={modalShow} onHide={() => setModalShow(false)} />
       </>
     );
   }
