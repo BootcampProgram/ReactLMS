@@ -44,14 +44,14 @@ useEffect(() => {
             {filteredBooks.map(y => 
                 <tr key = {y.detailID}>
                     <td>{`BD0${y.detailID}`}</td>
-                    <td style={{fontWeight:"bold"}}>{y.title}</td>
+                    <td className="font-weight-bold">{y.title}</td>
                     <td>{y.isbn}</td>
                     <td>{y.shelveCode}</td>
                     <td>{y.availability}</td>
                     <td><Button variant="success" size="sm" onClick={() => {setModalShow(true); setbookid(y.detailID)}}>View</Button></td>
                     <td className="text-center">
-                        <a href="#bookedit" className="mr-4"><FaEdit /></a>
-                        <a href="#bookdelete"><AiTwotoneDelete /></a>
+                        <a href="#bookedit" className="mr-4 Black" title="Edit Book"><FaEdit /></a>
+                        <a href="#bookdelete" className="Black" title="Delete Book"><AiTwotoneDelete /></a>
                     </td>
                 </tr>
                     )}

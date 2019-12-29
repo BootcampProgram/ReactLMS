@@ -44,3 +44,47 @@
 .Logout:hover{
   color: rgba(255,255,255,.7);
 }
+
+.Black{
+  color: black;
+}
+
+.Mispelled{
+  background-color: brown;
+  color: white;
+  display: inline-block;
+  padding: 3px;
+  width: 100px;
+  text-align: center;
+  margin: 0;
+}
+
+.Borrowed{
+  background-color: orange;
+  color: white;
+  display: inline-block;
+  padding: 3px;
+  width: 100px;
+  text-align: center;
+  margin: 0;
+}
+
+.Reserved{
+  background-color: blue;
+  color: white;
+  display: inline-block;
+  padding: 3px;
+  width: 100px;
+  text-align: center;
+  margin: 0;
+}
+
+.Available{
+  background-color: green;
+  color: white;
+  display: inline-block;
+  padding: 3px;
+  width: 100px;
+  text-align: center;
+  margin: 0;
+}
