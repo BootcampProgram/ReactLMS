@@ -57,7 +57,7 @@ useEffect(() => {
                     )}
             </tbody>
         </Table>
-        {filteredBooks.length === 0 && <h1 className="text-center">Data not Found</h1>}
+        {filteredBooks.length === 0 && <h3 className="text-center">Data not Found</h3>}
         <ViewBooksModal show={modalShow} onHide={() => setModalShow(false)} bookid={bookid}/>
       </>
     );

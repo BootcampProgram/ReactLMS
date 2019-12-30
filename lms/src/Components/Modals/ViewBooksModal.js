@@ -50,7 +50,7 @@ function ViewBooksModal(props) {
             <Modal.Body>
                 <Container>
                 <Row className="show-grid">
-                    <Col md={5} className="text-center">
+                    <Col md={5} className="text-center my-auto">
                         <Image src={require(`../../Coverimages/${coverImage}`)} thumbnail/>
                     </Col>
                     <Col md={7}>
@@ -118,7 +118,7 @@ function ViewBooksModal(props) {
                             <td>
                                 {book.status === "Borrowed" && <p className="Borrowed">Borrowed</p>}
                                 {book.status === "Reserved" && <p className="Reserved">Reserved</p>}
-                                {book.status === "Mispelled" && <p className="Mispelled">Mispelled</p>}
+                                {book.status === "Misplaced" && <p className="Misplaced">Misplaced</p>}
                                 {book.status === "Available" && <p className="Available">Available</p>}
                             </td>
                             </tr>

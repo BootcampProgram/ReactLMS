@@ -10,7 +10,7 @@ function Searchbar(props) {
     return (
         <InputGroup className="my-4 w-75 mx-auto">
             <FormControl
-                placeholder="Search by Book Details"
+                placeholder={props.placeholder}
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
                 onChange={event => setInputValue(event.target.value)}

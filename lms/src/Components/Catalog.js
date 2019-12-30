@@ -14,7 +14,7 @@ function Catalog() {
   }
     return (
       <>
-        <Searchbar search = {onSearch}/>
+        <Searchbar search = {onSearch} placeholder = "Search by Book Details"/>
         <Button variant="primary" className="ml-4 my-3">Add New Book</Button>
         <Booktable searchString = {SearchString}/>
       </>
