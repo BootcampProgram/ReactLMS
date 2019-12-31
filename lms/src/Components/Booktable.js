@@ -9,7 +9,7 @@ function Booktable(props) {
 //States
 const [listBooks, setlistBooks] = useState([]);
 const [modalShow, setModalShow] = useState(false);
-const [bookid, setbookid] = useState([]);
+const [bookid, setbookid] = useState("");
 
 //Filter books on search string
 var filteredBooks = listBooks.filter(c => 
@@ -48,7 +48,7 @@ useEffect(() => {
                     <td>{y.isbn}</td>
                     <td>{y.shelveCode}</td>
                     <td>{y.availability}</td>
-                    <td><Button variant="success" size="sm" onClick={() => {setModalShow(true); setbookid(y.detailID)}}>View</Button></td>
+                    <td><Button variant="success" size="sm" onClick={() => {setbookid(y.detailID); setModalShow(true);}}>View</Button></td>
                     <td className="text-center">
                         <a href="#bookedit" className="mr-4 Black" title="Edit Book"><FaEdit /></a>
                         <a href="#bookdelete" className="Black" title="Delete Book"><AiTwotoneDelete /></a>
