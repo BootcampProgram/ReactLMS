@@ -47,7 +47,11 @@ useEffect(() => {
                     <td className="font-weight-bold">{y.title}</td>
                     <td>{y.isbn}</td>
                     <td>{y.shelveCode}</td>
-                    <td>{y.availability}</td>
+                    <td>
+                        {y.availability === "Yes" && <p style={{color:"green", margin:"0"}}>Yes</p>}
+                        {y.availability === "No" && <p style={{color:"gray", margin:"0"}}>No</p>}
+                        {y.availability === "Not Available" && <p style={{color:"red", margin:"0"}}>Not Available</p>}
+                    </td>
                     <td><Button variant="success" size="sm" onClick={() => {setModalShow(true); setbookid(y.detailID)}}>View</Button></td>
                     <td className="text-center">
                         <a href="#bookedit" className="mr-4 Black" title="Edit Book"><FaEdit /></a>
