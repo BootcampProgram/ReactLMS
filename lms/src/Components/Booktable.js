@@ -9,7 +9,7 @@ function Booktable(props) {
 //States
 const [listBooks, setlistBooks] = useState([]);
 const [modalShow, setModalShow] = useState(false);
-const [bookid, setbookid] = useState([]);
+const [bookid, setbookid] = useState("");
 
 //Filter books on search string
 var filteredBooks = listBooks.filter(c => 
