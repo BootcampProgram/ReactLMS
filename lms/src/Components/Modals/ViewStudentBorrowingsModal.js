@@ -74,7 +74,7 @@ function ViewStudentBorrowingsModal(props){
               {pastBorrowings.map(borrowing =>
                   <tr key={borrowing.borrowingId}>
                     <td>{`BR0${borrowing.borrowingId}`}</td>
-                    <td>{`S00${borrowing.bookDetailID}`}: {borrowing.title}</td>
+                    <td>{`BD0${borrowing.bookDetailID}`}: {borrowing.title}</td>
                     <td>{borrowing.borrowDate}</td>
                     <td>{borrowing.returnDate}</td>
                   </tr>
