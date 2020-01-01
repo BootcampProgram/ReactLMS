@@ -6,11 +6,12 @@ import ViewStudentDetailsModal from './Modals/ViewStudentDetailsModal';
 
 function Studenttable (props){
 
+    var defaultStudentId;
     //States
     const [listStudents, setListStudents] = useState([]);
     const [borrowingsModalShow, setBorrowingsModalShow] = useState(false);
     const [ViewStudentModalShow, setViewStudentModalShow] = useState(false);
-    const [studentId,setstudentId]= useState("");
+    const [studentId,setstudentId]= useState("1");
 
     var searchStudent = listStudents.filter(student => 
         student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
@@ -55,8 +56,8 @@ function Studenttable (props){
              </tbody>
         </Table>
         {searchStudent.length===0 && <h3 className= "text-center">Data Not Found</h3>}
-        <ViewStudentBorrowingsModal show={borrowingsModalShow} onHide={() => setBorrowingsModalShow(false)} studentId = {studentId}/>
-        <ViewStudentDetailsModal show={ViewStudentModalShow} onHide={() => setViewStudentModalShow(false)} studentID={studentId}/>
+        <ViewStudentBorrowingsModal show={borrowingsModalShow} onHide={() => setBorrowingsModalShow(false)} studentid = {studentId}/>
+        <ViewStudentDetailsModal show={ViewStudentModalShow} onHide={() => setViewStudentModalShow(false)} studentid={studentId}/>
         </>
     );
 }

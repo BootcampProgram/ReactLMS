@@ -8,19 +8,25 @@ function ViewStudentDetailsModal(props){
 
     useEffect(() => {
 
-        fetch(`https://localhost:44381/api/student/${props.studentID}`)
-        .then(res => res.json())
+        fetch(`https://localhost:44381/api/student/${props.studentid}`)
+        .then(res => { 
+            if(res.status === 204){
+                return [];
+            }else{
+                return res.json();
+            }
+            })
         .then(data =>{
             setStudentDetail(data)
         })
 
-    }, [props.studentID])
-    console.log(studentDetail);
+    }, [props.studentid])
+
     return(
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter" size="lg" centered> 
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          Details of Students {`S00${props.studentID}`}
+          Details of Students {`S00${props.studentid}`}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -75,8 +81,6 @@ function ViewStudentDetailsModal(props){
                  </Row>
               </Col>
             </Row>
-  
-           
           </Container>
         </Modal.Body>
         <Modal.Footer>

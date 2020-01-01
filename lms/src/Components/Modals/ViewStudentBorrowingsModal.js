@@ -6,31 +6,27 @@ function ViewStudentBorrowingsModal(props){
     //States
     const [studentBorrowings, setStudentBorrowings] = useState([])
 
-    // var presentBorrowings = [];
-    // var pastBorrowings = [];
+    var presentBorrowings = [];
+    var pastBorrowings = [];
 
     useEffect(() => {
 
-        fetch(`https://localhost:44381/api/Borrowing/Student/${props.studentId}`)
+        fetch(`https://localhost:44381/api/borrowing/student/${props.studentid}`)
         .then(res => res.json())
         .then(data =>{
           setStudentBorrowings(data)
         })
-    }, [props.studentId])
+    }, [props.studentid])
 
-    console.log(studentBorrowings);
+    presentBorrowings = studentBorrowings.filter(B => B.status === "B");
 
-    // var Sstring = "B";
-
-    // var presentBorrowings = studentBorrowings.filter((b) => b.status.includes(Sstring));
-
-    // pastBorrowings = studentBorrowings.filter(B => B.status === "R");
+    pastBorrowings = studentBorrowings.filter(B => B.status === "R");
 
     return(
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter" size="lg" centered scrollable>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-            Borrowings of Student {`S00${props.studentId}`}
+            Borrowings of Student {`S00${props.studentid}`}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -40,23 +36,25 @@ function ViewStudentBorrowingsModal(props){
             <Table striped bordered hover size="sm" className="mt-2 mx-auto" style={{width:"97%"}}> 
               <thead>
                   <tr>
+                    <th>Borrowing ID</th>
                     <th>Book Detail</th>
                     <th>Borrowed Date</th>
                     <th>Return Date</th>
                   </tr>
               </thead>
               <tbody>
-              {/* {studentBorrowings.map(borrowing =>
-                  <tr>
-                    <td>{`S00${borrowing.bookDetailID}`}: {borrowing.title}</td>
+              {presentBorrowings.map(borrowing =>
+                  <tr key={borrowing.borrowingId}>
+                    <td>{`BR0${borrowing.borrowingId}`}</td>
+                    <td>{`BD0${borrowing.bookDetailID}`}: {borrowing.title}</td>
                     <td>{borrowing.borrowDate}</td>
                     <td style={{color:"red"}}>{borrowing.returnDate}</td>
                   </tr>
-              )} */}
+              )}
               </tbody>
           </Table>
           </Row>
-          {studentBorrowings.length===0 && <h6 className= "text-center" style={{color:"grey"}}>No Current Borrowings</h6>}
+          {presentBorrowings.length===0 && <h6 className= "text-center" style={{color:"grey"}}>No Current Borrowings</h6>}
         </Container>
         
 
@@ -66,23 +64,25 @@ function ViewStudentBorrowingsModal(props){
             <Table striped bordered hover size="sm" className="mt-2 mx-auto" style={{width:"97%"}}> 
               <thead>
                   <tr>
+                    <th>Borrowing ID</th>
                     <th>Book Detail</th>
                     <th>Borrowed Date</th>
                     <th>Return Date</th>
                   </tr>
               </thead>
               <tbody>
-              {/* {studentBorrowings.map(borrowing =>
-                  <tr>
+              {pastBorrowings.map(borrowing =>
+                  <tr key={borrowing.borrowingId}>
+                    <td>{`BR0${borrowing.borrowingId}`}</td>
                     <td>{`S00${borrowing.bookDetailID}`}: {borrowing.title}</td>
                     <td>{borrowing.borrowDate}</td>
                     <td>{borrowing.returnDate}</td>
                   </tr>
-              )} */}
+              )}
               </tbody>
           </Table>
           </Row>
-          {studentBorrowings.length===0 && <h6 className= "text-center" style={{color:"grey"}}>No Borrowings History</h6>}
+          {pastBorrowings.length===0 && <h6 className= "text-center" style={{color:"grey"}}>No Borrowings History</h6>}
         </Container>
       </Modal.Body>
       <Modal.Footer>
