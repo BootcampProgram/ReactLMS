@@ -62,7 +62,6 @@ function Studenttable(props) {
              </tbody>
         </Table>
         {searchStudent.length===0 && <h3 className= "text-center">Data Not Found</h3>}
-        {Payment.length===0 && <h3 className= "text-center">Data Not Found</h3>}
         <ViewStudentBorrowingsModal show={borrowingsModalShow} onHide={() => setBorrowingsModalShow(false)} studentid = {studentId}/>
         <ViewStudentDetailsModal show={ViewStudentModalShow} onHide={()=> setViewStudentModalShow(false)} studentid = {studentId}/>
         <ViewStudentPaymentModal show={ViewPaymentModalShow} onHide={() => setViewPaymentModalShow(false)} studentid = {studentId}/>

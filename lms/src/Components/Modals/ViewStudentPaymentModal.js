@@ -43,7 +43,7 @@ function ViewStudentPaymentModal(props){
               </tbody>
               
             </Table>
-            {studentPayment.length === 0 && <h4 className= "text-center">No Any Payments</h4>}
+            {studentPayment.length === 0 && <h6 className= "text-center" style={{color:"grey"}}>Not any Payments Found</h6>}
       </Modal.Body>
       <Modal.Footer>
       <Button onClick={props.onHide}>Close</Button>
