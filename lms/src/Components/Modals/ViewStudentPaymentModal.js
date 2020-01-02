@@ -27,9 +27,11 @@ function ViewStudentPaymentModal(props){
       <Modal.Body>
       <Table striped bordered hover size="sm">
               <thead>
-                <th>Borrowing ID</th>
-                <th>Return Date</th>
-                <th>Overdue Payment</th>
+                <tr>
+                  <th>Borrowing ID</th>
+                  <th>Return Date</th>
+                  <th>Overdue Payment</th>
+                </tr>
               </thead>
               <tbody>
                 {studentPayment.map(payment =>
