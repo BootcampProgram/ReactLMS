@@ -43,7 +43,7 @@ function ViewStudentDetailsModal(props){
                  </Row>
                  <Row>
                      <Form.Label className="font-weight-bold" column>DOB</Form.Label>
-                     <Col className="my-auto">{studentDetail.dateOfBirth}</Col>
+                     <Col className="my-auto">{studentDetail.dateOfBirth === undefined ? studentDetail.dateOfBirth : studentDetail.dateOfBirth.substring(0,10)}</Col>
                  </Row>
                  <Row>
                      <Form.Label className="font-weight-bold" column>Gender</Form.Label>

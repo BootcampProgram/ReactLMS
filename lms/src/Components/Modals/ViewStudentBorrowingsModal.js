@@ -47,8 +47,8 @@ function ViewStudentBorrowingsModal(props){
                   <tr key={borrowing.borrowingId}>
                     <td>{`BR0${borrowing.borrowingId}`}</td>
                     <td>{`BD0${borrowing.bookDetailID}`}: {borrowing.title}</td>
-                    <td>{borrowing.borrowDate}</td>
-                    <td style={{color:"red"}}>{borrowing.returnDate}</td>
+                    <td>{borrowing.borrowDate === undefined ? borrowing.borrowDate : borrowing.borrowDate.substring(0,10)}</td>
+                    <td style={{color:"red"}}>{borrowing.returnDate === undefined ?  borrowing.returnDate : borrowing.returnDate.substring(0,10)}</td>
                   </tr>
               )}
               </tbody>
@@ -75,8 +75,8 @@ function ViewStudentBorrowingsModal(props){
                   <tr key={borrowing.borrowingId}>
                     <td>{`BR0${borrowing.borrowingId}`}</td>
                     <td>{`BD0${borrowing.bookDetailID}`}: {borrowing.title}</td>
-                    <td>{borrowing.borrowDate}</td>
-                    <td>{borrowing.returnDate}</td>
+                    <td>{borrowing.borrowDate === undefined ? borrowing.borrowDate : borrowing.borrowDate.substring(0,10)}</td>
+                    <td>{borrowing.returnDate === undefined ?  borrowing.returnDate : borrowing.returnDate.substring(0,10)}</td>
                   </tr>
               )}
               </tbody>
