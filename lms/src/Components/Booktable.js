@@ -16,7 +16,7 @@ var filteredBooks = listBooks.filter(c =>
     c.title.toLowerCase().includes(props.searchString.toString().toLowerCase()) 
     || c.isbn.includes(props.searchString));
 
-props.setTabledata(listBooks);
+props.setTableData(listBooks);
 
 useEffect(() => {
 

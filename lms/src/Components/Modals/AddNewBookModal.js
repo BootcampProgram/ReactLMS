@@ -3,6 +3,7 @@ import '../../App.css';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 
 function AddNewBookModal(props) {
+    console.log(props.bookstablelist);
     return(
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>

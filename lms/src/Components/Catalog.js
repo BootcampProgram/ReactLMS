@@ -16,16 +16,15 @@ function Catalog() {
     setsearchString(stringValue);
   }
 
-  const setTabledata = (tableData) => {
+  const setTableData = (tableData) => {
     setBooksTableList(tableData);
-    console.log(booksTableList);
   }
     return (
       <>
         <Searchbar search = {onSearch} placeholder = "Search by Book Details"/>
         <Button variant="primary" className="ml-4 my-3" onClick={() => setModalShow(true)}>Add New Book</Button>
-        <Booktable searchString={SearchString} setTabledata={setTabledata}/>
-        <AddNewBookModal show={modalShow} onHide={() => setModalShow(false)} />
+        <Booktable searchString={SearchString} setTableData={setTableData}/>
+        <AddNewBookModal show={modalShow} onHide={() => setModalShow(false)} bookstablelist={booksTableList}/>
       </>
     );
   }
