@@ -7,19 +7,26 @@ import { Container } from 'react-bootstrap';
 function Reservation() {
   
   //State
-  const [searchString, setSearchString] = useState("");
+  const [parentReservationStatus, setParentReservationStatus] = useState("");
+  const [parentShelve, setParentShelve] = useState("");
 
   //Method
-  const onSearch = (inputValue) => {
-    setSearchString(inputValue)
-
+  const onSelectStatus = (inputStatus) => {
+    setParentReservationStatus(inputStatus);
+    // console.log("Parent: " + parentReservationStatus);
   }
+
+  const onSelectShelve = (inputShelve) =>{
+    setParentShelve(inputShelve);
+    // console.log("Parent Shelve: " + parentShelve);
+  }
+
     return (
       <div className="App">
         {/* <Searchbar search = {onSearch} placeholder = "Search By Reservations Attributes"/> */}
-        <Reservationfilters />
+        <Reservationfilters onselectstatus={onSelectStatus} onselectshelve={onSelectShelve}/>
         <Container className="mt-4">
-          <ReservationContainer searchString={searchString}/>
+          <ReservationContainer parentreservationstatus={parentReservationStatus} parentshelve={parentShelve}/>
         </Container>
       </div>
     );

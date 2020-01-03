@@ -3,14 +3,17 @@ import '../App.css';
 import { Table, Button} from 'react-bootstrap';
 import ViewStudentBorrowingsModal from './Modals/ViewStudentBorrowingsModal'
 import ViewStudentDetailsModal from './Modals/ViewStudentDetailsModal';
+import ResetPasswordModal from './Modals/ResetPasswordModal';
+import ResetPasswordSuccessfulModal from './Modals/ResetPasswordSuccessfulModal'
 
 function Studenttable (props){
 
-    var defaultStudentId;
     //States
     const [listStudents, setListStudents] = useState([]);
     const [borrowingsModalShow, setBorrowingsModalShow] = useState(false);
     const [ViewStudentModalShow, setViewStudentModalShow] = useState(false);
+    const [ResetPasswordModalShow, setResetPasswordModalShow] = useState(false);
+    const [ResetPasswordSuccessfulModalShow, setResetPasswordSuccessfulModalShow] = useState(false);
     const [studentId,setstudentId]= useState("1");
 
     var searchStudent = listStudents.filter(student => 
@@ -50,7 +53,7 @@ function Studenttable (props){
                     <td><Button variant="success" size="sm" onClick={() => {setViewStudentModalShow(true); setstudentId(student.studentId)}}>View</Button></td>
                     <td><Button variant="primary" size="sm">Payments</Button></td>
                     <td><Button variant="danger" size="sm">Block</Button></td>
-                    <td><Button variant="secondary" size="sm">Reset Password</Button></td>
+                    <td><Button variant="secondary" size="sm" onClick={() => {setResetPasswordModalShow(true); setstudentId(student.studentId)}}>Reset Password</Button></td>
                 </tr>
                 )}
              </tbody>
@@ -58,6 +61,8 @@ function Studenttable (props){
         {searchStudent.length===0 && <h3 className= "text-center">Data Not Found</h3>}
         <ViewStudentBorrowingsModal show={borrowingsModalShow} onHide={() => setBorrowingsModalShow(false)} studentid = {studentId}/>
         <ViewStudentDetailsModal show={ViewStudentModalShow} onHide={() => setViewStudentModalShow(false)} studentid={studentId}/>
+        <ResetPasswordModal show={ResetPasswordModalShow} onHide={() => setResetPasswordModalShow(false)} studentid={studentId}/>
+        <ResetPasswordSuccessfulModal show={ResetPasswordSuccessfulModalShow} onHide={() => setResetPasswordSuccessfulModalShow(false)} studentid={studentId}/>
         </>
     );
 }
