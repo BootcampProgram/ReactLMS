@@ -52,7 +52,7 @@ function ReservationsTable(props) {
                     {/* Book detail section */}
                     <Col md={3} >
                         <Row>
-                            <Form.Label className="font-weight-bold text-left" column>{`BD0${Reservations.bookID}`}: {Reservations.title}</Form.Label>
+                            <Form.Label className="font-weight-bold text-left" column>{`B00${Reservations.bookID}`}: {Reservations.title}</Form.Label>
                         </Row>
                         <Row>
                             <Col className="text-left" md={3}><small>Author:</small></Col>
