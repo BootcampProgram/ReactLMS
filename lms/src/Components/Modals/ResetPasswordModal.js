@@ -26,7 +26,7 @@ const successModal = () => {
     <>
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
     <Modal.Header closeButton>
-      <Modal.Title id="contained-modal-title-vcenter" style={{fontSize: "18px"}}>
+      <Modal.Title id="contained-modal-title-vcenter" style={{fontSize: "18px"}} className="p-1">
         Are you sure you want to reset the password? {`S00${props.studentid}`}
       </Modal.Title>
     </Modal.Header>
