@@ -16,14 +16,15 @@ var filteredBooks = listBooks.filter(c =>
     c.title.toLowerCase().includes(props.searchString.toString().toLowerCase()) 
     || c.isbn.includes(props.searchString));
 
+props.setTableData(listBooks);
+
 useEffect(() => {
 
     fetch("https://localhost:44381/api/book")
     .then(res => res.json())
     .then(data => {
-        setlistBooks(data)
+        setlistBooks(data);
     })
-
 }, [])
 
     return (

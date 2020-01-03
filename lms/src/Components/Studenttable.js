@@ -5,8 +5,9 @@ import ViewStudentBorrowingsModal from './Modals/ViewStudentBorrowingsModal'
 import ViewStudentDetailsModal from './Modals/ViewStudentDetailsModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
 import ResetPasswordSuccessfulModal from './Modals/ResetPasswordSuccessfulModal'
+import ViewStudentPaymentModal from './Modals/ViewStudentPaymentModal';
 
-function Studenttable (props){
+function Studenttable(props) {
 
     //States
     const [listStudents, setListStudents] = useState([]);
@@ -15,10 +16,15 @@ function Studenttable (props){
     const [ResetPasswordModalShow, setResetPasswordModalShow] = useState(false);
     const [ResetPasswordSuccessfulModalShow, setResetPasswordSuccessfulModalShow] = useState(false);
     const [studentId,setstudentId]= useState("1");
+    const [ViewPaymentModalShow, setViewPaymentModalShow] = useState(false);
 
     var searchStudent = listStudents.filter(student => 
         student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
         )
+
+        var Payment = listStudents.filter(student => 
+            student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
+            )
 
      useEffect (() => {
 
@@ -51,7 +57,7 @@ function Studenttable (props){
                     <td className="font-weight-bold">{student.fullName}</td>
                     <td><Button size="sm" style={{color:"white", backgroundColor:"orange", borderStyle:"none"}} onClick={() => {setBorrowingsModalShow(true); setstudentId(student.studentId)}}>Borrowings</Button></td>
                     <td><Button variant="success" size="sm" onClick={() => {setViewStudentModalShow(true); setstudentId(student.studentId)}}>View</Button></td>
-                    <td><Button variant="primary" size="sm">Payments</Button></td>
+                    <td><Button variant="primary" size="sm"  onClick={() => {setViewPaymentModalShow(true); setstudentId(student.studentId)}}>Payments</Button></td>
                     <td><Button variant="danger" size="sm">Block</Button></td>
                     <td><Button variant="secondary" size="sm" onClick={() => {setResetPasswordModalShow(true); setstudentId(student.studentId)}}>Reset Password</Button></td>
                 </tr>
@@ -60,9 +66,10 @@ function Studenttable (props){
         </Table>
         {searchStudent.length===0 && <h3 className= "text-center">Data Not Found</h3>}
         <ViewStudentBorrowingsModal show={borrowingsModalShow} onHide={() => setBorrowingsModalShow(false)} studentid = {studentId}/>
-        <ViewStudentDetailsModal show={ViewStudentModalShow} onHide={() => setViewStudentModalShow(false)} studentid={studentId}/>
         <ResetPasswordModal show={ResetPasswordModalShow} onHide={() => setResetPasswordModalShow(false)} studentid={studentId}/>
         <ResetPasswordSuccessfulModal show={ResetPasswordSuccessfulModalShow} onHide={() => setResetPasswordSuccessfulModalShow(false)} studentid={studentId}/>
+        <ViewStudentDetailsModal show={ViewStudentModalShow} onHide={()=> setViewStudentModalShow(false)} studentid = {studentId}/>
+        <ViewStudentPaymentModal show={ViewPaymentModalShow} onHide={() => setViewPaymentModalShow(false)} studentid = {studentId}/>
         </>
     );
 }
