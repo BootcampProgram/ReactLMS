@@ -19,16 +19,9 @@ var filteredBooks = listBooks.filter(c =>
 
 props.setTableData(listBooks);
 
-const onBookView = (input) => {
+const onBookView = useCallback((input) => {
     setBookDetail(input)
-}
-
-const memoizedCallback = useCallback(
-    () => {
-        onBookView(input);
-    },
-    [input],
-  );
+},[])
 
 useEffect(() => {
 

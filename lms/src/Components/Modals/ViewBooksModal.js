@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import '../../App.css';
 import { Modal, Button, Container, Row, Col, Form, Image, Table } from 'react-bootstrap';
 
@@ -29,10 +29,6 @@ function ViewBooksModal({bookview, bookid, ...props}) {
         coverImage = 'Default.jpg';
     }
 
-    const setBookList = useCallback((data) => {
-        props.bookview(data)
-    },[props])
-
     //bookDetail.author = [];
     useEffect(() => {
 
@@ -43,7 +39,7 @@ function ViewBooksModal({bookview, bookid, ...props}) {
         })
         console.log("Count")
 
-    }, [bookid])
+    }, [bookid, bookview])
 
     
 
