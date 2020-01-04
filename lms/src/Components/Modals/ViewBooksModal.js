@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import '../../App.css';
 import { Modal, Button, Container, Row, Col, Form, Image, Table } from 'react-bootstrap';
 
 function ViewBooksModal(props) {
     //States
-    const [bookDetail, setBookDetail] = useState([])
 
     var authorList;
     var copies;
     var coverImage;
 
-    authorList = bookDetail.author;
-    copies = bookDetail.copies;
-    coverImage = bookDetail.coverImage;
+    console.log(props.bookdetail)
+
+    authorList = props.bookdetail.author;
+    copies = props.bookdetail.copies;
+    coverImage = props.bookdetail.coverImage;
 
     if(authorList === undefined){
         authorList = [];
@@ -26,14 +27,19 @@ function ViewBooksModal(props) {
         coverImage = 'Default.jpg';
     }
 
+    const setBookList = useCallback((data) => {
+        props.bookview(data)
+    },[props])
+
     //bookDetail.author = [];
     useEffect(() => {
 
         fetch(`https://localhost:44381/api/book/${props.bookid}`)
         .then(res => res.json())
         .then(data =>{
-            setBookDetail(data)
+            setBookList(data)
         })
+        console.log("Count")
 
     }, [props.bookid])
 
@@ -56,7 +62,7 @@ function ViewBooksModal(props) {
                     <Col md={7}>
                         <Row>
                             <Form.Label className="font-weight-bold" column>Title</Form.Label>
-                            <Col className="my-auto">{bookDetail.title}</Col>
+                            <Col className="my-auto">{props.bookdetail.title}</Col>
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column> Author(s)</Form.Label>
@@ -70,31 +76,31 @@ function ViewBooksModal(props) {
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column>ISBN</Form.Label>
-                            <Col className="my-auto">{bookDetail.isbn}</Col>
+                            <Col className="my-auto">{props.bookdetail.isbn}</Col>
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column>Publisher</Form.Label>
-                            <Col className="my-auto">{bookDetail.publisher}</Col>
+                            <Col className="my-auto">{props.bookdetail.publisher}</Col>
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column>Genre</Form.Label>
-                            <Col className="my-auto">{bookDetail.genre}</Col>
+                            <Col className="my-auto">{props.bookdetail.genre}</Col>
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column>Shelve</Form.Label>
-                            <Col className="my-auto">{bookDetail.shelve}</Col>
+                            <Col className="my-auto">{props.bookdetail.shelve}</Col>
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column>Language</Form.Label>
-                            <Col className="my-auto">{bookDetail.language}</Col>
+                            <Col className="my-auto">{props.bookdetail.language}</Col>
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column>Published Year</Form.Label>
-                            <Col className="my-auto">{bookDetail.year}</Col>
+                            <Col className="my-auto">{props.bookdetail.year}</Col>
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column>Price</Form.Label>
-                            <Col className="my-auto">LKR {bookDetail.price}</Col>
+                            <Col className="my-auto">LKR {props.bookdetail.price}</Col>
                         </Row>
                         <Row>
                             <Form.Label className="font-weight-bold" column>No.of Copies</Form.Label>

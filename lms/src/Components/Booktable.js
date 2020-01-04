@@ -10,6 +10,7 @@ function Booktable(props) {
 const [listBooks, setlistBooks] = useState([]);
 const [modalShow, setModalShow] = useState(false);
 const [bookid, setbookid] = useState("");
+const [bookDetail, setBookDetail] = useState([])
 
 //Filter books on search string
 var filteredBooks = listBooks.filter(c => 
@@ -17,6 +18,10 @@ var filteredBooks = listBooks.filter(c =>
     || c.isbn.includes(props.searchString));
 
 props.setTableData(listBooks);
+
+const onBookView = (input) => {
+    setBookDetail(input)
+}
 
 useEffect(() => {
 
@@ -63,7 +68,7 @@ useEffect(() => {
             </tbody>
         </Table>
         {filteredBooks.length === 0 && <h3 className="text-center">Data not Found</h3>}
-        <ViewBooksModal show={modalShow} onHide={() => setModalShow(false)} bookid={bookid}/>
+        <ViewBooksModal show={modalShow} onHide={() => {setModalShow(false); setBookDetail([]); setbookid("");}} bookid={bookid} bookview={onBookView} bookdetail={bookDetail}/>
       </>
     );
   }

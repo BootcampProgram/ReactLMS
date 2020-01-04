@@ -22,9 +22,9 @@ function Studenttable(props) {
         student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
         )
 
-        var Payment = listStudents.filter(student => 
-            student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
-            )
+    // var Payment = listStudents.filter(student => 
+    //     student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
+    //     )
 
      useEffect (() => {
 
