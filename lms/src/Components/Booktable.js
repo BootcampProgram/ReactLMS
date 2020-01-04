@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '../App.css';
 import { Table, Button } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
@@ -22,6 +22,13 @@ props.setTableData(listBooks);
 const onBookView = (input) => {
     setBookDetail(input)
 }
+
+const memoizedCallback = useCallback(
+    () => {
+        onBookView(input);
+    },
+    [input],
+  );
 
 useEffect(() => {
 

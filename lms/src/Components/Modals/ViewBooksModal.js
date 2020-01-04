@@ -2,8 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import '../../App.css';
 import { Modal, Button, Container, Row, Col, Form, Image, Table } from 'react-bootstrap';
 
-function ViewBooksModal(props) {
-    //States
+function ViewBooksModal({bookview, bookid, ...props}) {
+    //Copying "props" object to "divProps" object  
+    const divProps = Object.assign({}, props);
+    delete divProps.bookview;
 
     var authorList;
     var copies;
@@ -34,23 +36,23 @@ function ViewBooksModal(props) {
     //bookDetail.author = [];
     useEffect(() => {
 
-        fetch(`https://localhost:44381/api/book/${props.bookid}`)
+        fetch(`https://localhost:44381/api/book/${bookid}`)
         .then(res => res.json())
         .then(data =>{
-            setBookList(data)
+            bookview(data)
         })
         console.log("Count")
 
-    }, [props.bookid])
+    }, [bookid])
 
     
 
     return (
 
-        <Modal {...props} aria-labelledby="contained-modal-title-vcenter" size="lg" centered scrollable>
+        <Modal {...divProps} aria-labelledby="contained-modal-title-vcenter" size="lg" centered scrollable>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                Details of Book {`BD0${props.bookid}`}
+                Details of Book {`BD0${bookid}`}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
