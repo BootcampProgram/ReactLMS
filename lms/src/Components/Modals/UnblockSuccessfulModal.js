@@ -3,8 +3,6 @@ import '../../App.css';
 import { Modal, Button, Container, Row, Col} from 'react-bootstrap';
 
 function UnblockSuccessfulModal(props){
-  console.log("SID: " + props.studentid)
-  console.log("SID: " + props.respondmessage)
     return(
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
     <Modal.Header closeButton>

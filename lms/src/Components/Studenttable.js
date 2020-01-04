@@ -19,23 +19,20 @@ function Studenttable(props) {
     const [UnblockModalShow, setUnblockModalShow] = useState(false);
     const [studentId,setstudentId]= useState(["1"]);
     const [ViewPaymentModalShow, setViewPaymentModalShow] = useState(false);
+    const [refresh, setRefresh] = useState(0);
 
     var searchStudent = listStudents.filter(student => 
         student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
         )
 
-    // var Payment = listStudents.filter(student => 
-    //     student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
-    //     )
+    useEffect (() => {
 
-     useEffect (() => {
-
-        fetch("https://localhost:44381/api/student")
-            .then(res => res.json())
-            .then(data => {
-                setListStudents(data)
-            })    
-    },[])
+    fetch("https://localhost:44381/api/student")
+        .then(res => res.json())
+        .then(data => {
+            setListStudents(data)
+        })    
+    },[refresh])
 
     return(
         <>
@@ -63,12 +60,12 @@ function Studenttable(props) {
                         <Button variant="danger" size="sm" 
                             onClick={() => {setBlockModalShow(true); setstudentId(student.studentId)}} 
                             className="mr-3"
-                            disabled={student.status !== true || student.status === false? true : false }>
+                            disabled={student.status === false? true : false }>
                             Block
                         </Button>
                         <Button variant="secondary" size="sm" 
                             onClick={() => {setUnblockModalShow(true); setstudentId(student.studentId)}}
-                            disabled={student.status === true || student.status !== false? true : false }>
+                            disabled={student.status === true? true : false }>
                             Unblock
                         </Button>
                     </td>
@@ -80,8 +77,8 @@ function Studenttable(props) {
         {searchStudent.length===0 && <h3 className= "text-center">Data Not Found</h3>}
         <ViewStudentBorrowingsModal show={borrowingsModalShow} onHide={() => setBorrowingsModalShow(false)} studentid = {studentId}/>
         <ResetPasswordModal show={ResetPasswordModalShow} onHide={() => setResetPasswordModalShow(false)} studentid={studentId}/>
-        <BlockModal show={BlockModalShow} onHide={() => setBlockModalShow(false)} studentid={studentId}/>
-        <UnblockModal show={UnblockModalShow} onHide={() => setUnblockModalShow(false)} studentid={studentId}/>
+        <BlockModal show={BlockModalShow} onHide={() => setBlockModalShow(false)} studentid={studentId} setrefresh={setRefresh} refresh={refresh}/>
+        <UnblockModal show={UnblockModalShow} onHide={() => setUnblockModalShow(false)} studentid={studentId} setrefresh={setRefresh} refresh={refresh}/>
         <ViewStudentDetailsModal show={ViewStudentModalShow} onHide={()=> setViewStudentModalShow(false)} studentid = {studentId}/>
         <ViewStudentPaymentModal show={ViewPaymentModalShow} onHide={() => setViewPaymentModalShow(false)} studentid = {studentId}/>
         </>

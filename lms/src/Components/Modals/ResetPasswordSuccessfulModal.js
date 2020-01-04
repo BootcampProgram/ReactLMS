@@ -3,7 +3,6 @@ import '../../App.css';
 import { Modal, Button, Container, Row, Col} from 'react-bootstrap';
 
 function ResetPasswordSuccessfulModal(props){
-  console.log("SID: " + props.studentidd)
     return(
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
     <Modal.Header closeButton>
