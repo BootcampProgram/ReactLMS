@@ -1,21 +1,20 @@
 import React, {useState } from 'react'; 
 import '../../App.css';
 import { Modal, Button, Container, Row, Col} from 'react-bootstrap';
-import ResetPasswordSuccessfulModal from './ResetPasswordSuccessfulModal'
+import BlockSuccessfulModal from './BlockSuccessfulModal'
 
-function ResetPasswordModal(props){
-  
-  const [ResetPasswordSuccessfulModalShow, setResetPasswordSuccessfulModalShow] = useState(false);
+function BlockModal(props){
+
+  const [BlockSuccessfulModalShow, setBlockSuccessfulModalShow] = useState(false);
   const [studentId,setstudentId]= useState(props);
   const [respondMessage, setRespondMessage] = useState("");
 
 const successModal = () => {
   props.onHide();
-  setResetPasswordSuccessfulModalShow(true);
+  setBlockSuccessfulModalShow(true);
 };
-
-const resetPassword = () => {
-    fetch(`https://localhost:44381/api/student/reset/${props.studentid}`, {
+const blockStudent = () => {
+    fetch(`https://localhost:44381/api/student/block/${props.studentid}`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
@@ -40,25 +39,23 @@ const resetPassword = () => {
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
     <Modal.Header closeButton>
       <Modal.Title id="contained-modal-title-vcenter" style={{fontSize: "18px"}} className="p-1">
-        Are you sure you want to reset the password of  student {`S00${props.studentid}`}? 
+        Are you sure you want to block student {`S00${props.studentid}`}? 
       </Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <Container>
         <Row className="show-grid, text-right mt-3">
           <Col>
-            <Button variant="primary" className="mr-3" size="md" 
-              onClick={() => {successModal(true); resetPassword() ; setstudentId(props.studentid)}}>Yes
-            </Button>
+            <Button variant="primary" className="mr-3" size="md" onClick={() => {successModal(true); blockStudent(); setstudentId(props.studentid)}}>Yes</Button>
             <Button variant="secondary" size="md" onClick={props.onHide}>No</Button>
           </Col>
         </Row>
       </Container>
     </Modal.Body>
   </Modal>
-  <ResetPasswordSuccessfulModal show={ResetPasswordSuccessfulModalShow} onHide={() => setResetPasswordSuccessfulModalShow(false)} studentidd = {studentId} respondmessage={respondMessage}/>
+  <BlockSuccessfulModal show={BlockSuccessfulModalShow} onHide={() => setBlockSuccessfulModalShow(false)} studentid = {studentId}  respondmessage={respondMessage}/>
   </>
   );
 }
 
-export default ResetPasswordModal;
+export default BlockModal;
