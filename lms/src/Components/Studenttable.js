@@ -4,7 +4,8 @@ import { Table, Button} from 'react-bootstrap';
 import ViewStudentBorrowingsModal from './Modals/ViewStudentBorrowingsModal'
 import ViewStudentDetailsModal from './Modals/ViewStudentDetailsModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
-import ResetPasswordSuccessfulModal from './Modals/ResetPasswordSuccessfulModal'
+import BlockModal from './Modals/BlockModal'
+import UnblockModal from './Modals/UnblockModal'
 import ViewStudentPaymentModal from './Modals/ViewStudentPaymentModal';
 
 function Studenttable(props) {
@@ -14,8 +15,9 @@ function Studenttable(props) {
     const [borrowingsModalShow, setBorrowingsModalShow] = useState(false);
     const [ViewStudentModalShow, setViewStudentModalShow] = useState(false);
     const [ResetPasswordModalShow, setResetPasswordModalShow] = useState(false);
-    const [ResetPasswordSuccessfulModalShow, setResetPasswordSuccessfulModalShow] = useState(false);
-    const [studentId,setstudentId]= useState("1");
+    const [BlockModalShow, setBlockModalShow] = useState(false);
+    const [UnblockModalShow, setUnblockModalShow] = useState(false);
+    const [studentId,setstudentId]= useState(["1"]);
     const [ViewPaymentModalShow, setViewPaymentModalShow] = useState(false);
 
     var searchStudent = listStudents.filter(student => 
@@ -32,8 +34,7 @@ function Studenttable(props) {
             .then(res => res.json())
             .then(data => {
                 setListStudents(data)
-            })
-        
+            })    
     },[])
 
     return(
@@ -58,7 +59,19 @@ function Studenttable(props) {
                     <td><Button size="sm" style={{color:"white", backgroundColor:"orange", borderStyle:"none"}} onClick={() => {setBorrowingsModalShow(true); setstudentId(student.studentId)}}>Borrowings</Button></td>
                     <td><Button variant="success" size="sm" onClick={() => {setViewStudentModalShow(true); setstudentId(student.studentId)}}>View</Button></td>
                     <td><Button variant="primary" size="sm"  onClick={() => {setViewPaymentModalShow(true); setstudentId(student.studentId)}}>Payments</Button></td>
-                    <td><Button variant="danger" size="sm">Block</Button></td>
+                    <td>
+                        <Button variant="danger" size="sm" 
+                            onClick={() => {setBlockModalShow(true); setstudentId(student.studentId)}} 
+                            className="mr-3"
+                            disabled={student.status !== true || student.status === false? true : false }>
+                            Block
+                        </Button>
+                        <Button variant="secondary" size="sm" 
+                            onClick={() => {setUnblockModalShow(true); setstudentId(student.studentId)}}
+                            disabled={student.status === true || student.status !== false? true : false }>
+                            Unblock
+                        </Button>
+                    </td>
                     <td><Button variant="secondary" size="sm" onClick={() => {setResetPasswordModalShow(true); setstudentId(student.studentId)}}>Reset Password</Button></td>
                 </tr>
                 )}
@@ -67,7 +80,8 @@ function Studenttable(props) {
         {searchStudent.length===0 && <h3 className= "text-center">Data Not Found</h3>}
         <ViewStudentBorrowingsModal show={borrowingsModalShow} onHide={() => setBorrowingsModalShow(false)} studentid = {studentId}/>
         <ResetPasswordModal show={ResetPasswordModalShow} onHide={() => setResetPasswordModalShow(false)} studentid={studentId}/>
-        <ResetPasswordSuccessfulModal show={ResetPasswordSuccessfulModalShow} onHide={() => setResetPasswordSuccessfulModalShow(false)} studentid={studentId}/>
+        <BlockModal show={BlockModalShow} onHide={() => setBlockModalShow(false)} studentid={studentId}/>
+        <UnblockModal show={UnblockModalShow} onHide={() => setUnblockModalShow(false)} studentid={studentId}/>
         <ViewStudentDetailsModal show={ViewStudentModalShow} onHide={()=> setViewStudentModalShow(false)} studentid = {studentId}/>
         <ViewStudentPaymentModal show={ViewPaymentModalShow} onHide={() => setViewPaymentModalShow(false)} studentid = {studentId}/>
         </>

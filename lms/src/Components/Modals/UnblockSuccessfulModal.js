@@ -2,13 +2,14 @@ import React from 'react';
 import '../../App.css';
 import { Modal, Button, Container, Row, Col} from 'react-bootstrap';
 
-function ResetPasswordSuccessfulModal(props){
-  console.log("SID: " + props.studentidd)
+function UnblockSuccessfulModal(props){
+  console.log("SID: " + props.studentid)
+  console.log("SID: " + props.respondmessage)
     return(
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
     <Modal.Header closeButton>
       <Modal.Title id="contained-modal-title-vcenter" style={{fontSize: "18px"}} className="p-1">
-      Password reset is {props.respondmessage}!
+        {props.respondmessage}ly Unblocked! 
       </Modal.Title>
     </Modal.Header>
     <Modal.Body>
@@ -24,4 +25,4 @@ function ResetPasswordSuccessfulModal(props){
     )
 }
 
-export default ResetPasswordSuccessfulModal;
+export default UnblockSuccessfulModal;
