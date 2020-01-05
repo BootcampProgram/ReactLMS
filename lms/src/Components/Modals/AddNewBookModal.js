@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../App.css';
 import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 
-function AddNewBookModal(props) {
-    //States
-    const [bookFound, setBookFound] = useState([]);
-    const [isbnNumber, setIsbnNumber] = useState("");
+function AddNewBookModal({setisnumber, ...props}) {
+    
     console.log(props.bookstablelist);
     //console.log(isbnNumber)
 
@@ -24,7 +22,7 @@ function AddNewBookModal(props) {
             <Container>
             <Row className="show-grid">
                 <Form.Label>Enter Book ISBN Number</Form.Label>
-                <Form.Control placeholder="Enter ISBN" onChange={event => props.setisnumber(event.target.value)}/>
+                <Form.Control placeholder="Enter ISBN" onChange={event => setisnumber(event.target.value)}/>
                 <Form.Text className="text-muted">
                     This book may already in database.
                 </Form.Text>
@@ -55,7 +53,7 @@ function AddNewBookModal(props) {
             </Container>
         </Modal.Body>
         <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
+            <Button onClick={props.onHide}>Add New</Button>
             <Button variant="dark" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
         </Modal>
