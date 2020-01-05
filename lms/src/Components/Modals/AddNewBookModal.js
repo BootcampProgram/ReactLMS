@@ -4,18 +4,17 @@ import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 
 function AddNewBookModal(props) {
     //States
-    const [isbnNumber, setIsbnNumber] = useState("");
     const [bookFound, setBookFound] = useState([]);
     console.log(props.bookstablelist);
-    console.log(isbnNumber)
+    //console.log(isbnNumber)
 
-    var isBookFound = props.bookstablelist.filter(book => book.isbn === isbnNumber);
-    console.log("ISBN: "+isbnNumber)
+    var isBookFound = props.bookstablelist.filter(book => book.isbn === props.isbnnumber);
+    console.log("ISBN: "+props.isbnnumber)
     console.log(isBookFound)
 
-    const onMyClick = () => {
-        setIsbnNumber("");
-    }
+    // const onMyClick = () => {
+    //     setIsbnNumber("");
+    // }
     return(
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>
@@ -27,7 +26,7 @@ function AddNewBookModal(props) {
             <Container>
             <Row className="show-grid">
                 <Form.Label>Enter Book ISBN Number</Form.Label>
-                <Form.Control placeholder="Enter ISBN" onChange={event => setIsbnNumber(event.target.value)}/>
+                <Form.Control placeholder="Enter ISBN" onChange={event => props.setisnumber(event.target.value)}/>
                 <Form.Text className="text-muted">
                     This book may already in database.
                 </Form.Text>
