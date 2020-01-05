@@ -11,8 +11,6 @@ function ViewBooksModal({bookview, bookid, ...props}) {
     var copies;
     var coverImage;
 
-    console.log(props.bookdetail)
-
     authorList = props.bookdetail.author;
     copies = props.bookdetail.copies;
     coverImage = props.bookdetail.coverImage;
@@ -37,7 +35,6 @@ function ViewBooksModal({bookview, bookid, ...props}) {
         .then(data =>{
             bookview(data)
         })
-        console.log("Count")
 
     }, [bookid, bookview])
 
