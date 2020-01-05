@@ -6,6 +6,7 @@ import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 function AddNewBookModal({setisnumber, ...props}) {
 
     const [newBookModalShow, setNewBookModalShow] = useState(false);
+    const [generatedBookId, setGeneratedBookId] = useState(0);
 
     var isBookFound = props.bookstablelist.filter(book => book.isbn === props.isbnnumber);
 
@@ -21,22 +22,19 @@ function AddNewBookModal({setisnumber, ...props}) {
                 "detailId":detailId,
 	            "status":"1"
             })
-        });
-
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = "";
-
-        var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-        };
-
-        fetch(`https://localhost:44381/api/bookIdentification/new/${detailId}`, requestOptions)
+        })
+        .then(() => {
+            return fetch(`https://localhost:44381/api/bookIdentification/new/${detailId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                redirect: 'follow'
+                });
+            
+            })
         .then(response => response.text())
-        .then(result => console.log("Result: " + result))
+        .then(result => setGeneratedBookId(result))
         .catch(error => console.log('error', error));
     }
 
@@ -44,7 +42,7 @@ function AddNewBookModal({setisnumber, ...props}) {
     //     console.log("I'm in: " + bookDetailid);
         
     // }
-    
+    console.log("id: " + generatedBookId)
     return(
         <>
             <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
@@ -94,7 +92,7 @@ function AddNewBookModal({setisnumber, ...props}) {
                 <Button variant="dark" onClick={props.onHide}>Close</Button>
             </Modal.Footer>
             </Modal>
-            <ShowNewBookIdModal show={newBookModalShow} onHide={() => setNewBookModalShow(false)} detailid={detailId} />
+            <ShowNewBookIdModal show={newBookModalShow} onHide={() => setNewBookModalShow(false)} generatedbookid={generatedBookId} />
         </>
     );
 }
