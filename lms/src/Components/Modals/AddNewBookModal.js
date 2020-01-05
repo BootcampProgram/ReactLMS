@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
 import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 
 function AddNewBookModal(props) {
     //States
     const [bookFound, setBookFound] = useState([]);
+    const [isbnNumber, setIsbnNumber] = useState("");
     console.log(props.bookstablelist);
     //console.log(isbnNumber)
 
     var isBookFound = props.bookstablelist.filter(book => book.isbn === props.isbnnumber);
     console.log("ISBN: "+props.isbnnumber)
     console.log(isBookFound)
-
-    // const onMyClick = () => {
-    //     setIsbnNumber("");
-    // }
+    
     return(
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>
