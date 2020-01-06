@@ -29,7 +29,7 @@ function ReservationsTable({setrefresh, refresh, ...props}) {
             R.status === props.parentreservationstatus && 
             R.shelve === props.parentshelve);
     }
-
+    
     useEffect(() => {
         fetch("https://localhost:44381/api/reservation")
         .then(res => res.json())
@@ -37,6 +37,13 @@ function ReservationsTable({setrefresh, refresh, ...props}) {
             setlistReservations(data);
         });
     }, [refresh])
+
+    const deleteReservation = (input) => {
+        fetch(`https://localhost:44381/api/reservation/delete/${input}`, {
+            method: 'DELETE'
+        })
+        .then(() => setrefresh(refresh===0? 1 : 0))
+    }
 
 
     const addToMainShelve = (input) => {
@@ -151,7 +158,10 @@ function ReservationsTable({setrefresh, refresh, ...props}) {
                                     </Col>
                                 </Row>
                             </Col>
-                            <Col md={1} className="pl-1 my-auto"><IoMdClose/></Col>
+                            <Col md={1} className="pl-1 my-auto">
+                                <a href="#nothing" 
+                                onClick={() => deleteReservation(Reservations.reservationID)} 
+                                className={Reservations.status === "Expired"? "close-active" : "not-active"}><IoMdClose/></a></Col>
                         </Row>
                         {/* Created a gutter row */}
                         <Row style={{margin:"40px 0 40px 0"}}></Row>

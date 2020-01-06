@@ -88,3 +88,14 @@
   text-align: center;
   margin: 0;
 }
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: gray;
+}
+
+.close-active {
+  color: black;
+}
