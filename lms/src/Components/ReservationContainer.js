@@ -3,7 +3,7 @@ import '../App.css';
 import { Container, Row, Col, Image, Form, Button} from 'react-bootstrap';
 import { IoMdClose } from 'react-icons/io';
 
-function ReservationsTable(props) {
+function ReservationsTable({setrefresh, ...props}) {
     //States
     const [listReservations, setlistReservations] = useState([]);
 
@@ -30,16 +30,58 @@ function ReservationsTable(props) {
             R.shelve === props.parentshelve);
     }
 
-
     useEffect(() => {
     
         fetch("https://localhost:44381/api/reservation")
         .then(res => res.json())
         .then(data => {
             setlistReservations(data)
-        })
+        });
     }, [])
 
+
+    const addToMainShelve = (input) => {
+        fetch(`https://localhost:44381/api/reservation/MainShelve/${input}`, {
+            method: 'PUT',
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+            },
+            body: JSON.stringify()
+        })
+            .then(res => {
+              if(res.status === 200){
+                return [];
+              }else{
+                res.json();
+              }})
+            .catch(error => {
+                console.log(error)
+            })
+    }
+   
+
+    const addToSubShelve = (input) => {
+        console.log("input: " + input);
+        fetch(`https://localhost:44381/api/reservation/SubShelve/${input}`, {
+            method: 'PUT',
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+            },
+            body: JSON.stringify()
+        })
+            .then(res => {
+              if(res.status === 200){
+                return [];
+              }else{
+                res.json();
+              }})
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+
+    
     return(
         <>
         {filteredList.map(Reservations => 
@@ -113,8 +155,18 @@ function ReservationsTable(props) {
                         <Row style={{margin:"40px 0 40px 0"}}></Row>
                         <Row>
                             <Col className="mt-auto">
-                                <Button variant="success" className="mr-4" size="sm"  disabled={Reservations.shelve !== "Main" || Reservations.shelve === "Sub"? true : false }>Add to Sub Shelf</Button>
-                                <Button variant="danger" size="sm" disabled={Reservations.shelve === "Main" || Reservations.shelve !== "Sub"? true : false }>Retur to Main Shelf</Button>
+                                <Button 
+                                    variant="success" className="mr-4" size="sm"  
+                                    disabled={Reservations.shelve === "Main"? false: true} 
+                                    onClick={() => {addToSubShelve(Reservations.reservationID); setrefresh(props.refresh===0? 1 : 0);}}
+                                    >Add to Sub Shelf {Reservations.reservationID}
+                                </Button>
+                                <Button 
+                                    variant="danger" size="sm" 
+                                    disabled={Reservations.shelve === "Sub"? false: true} 
+                                    onClick={() => {addToMainShelve(Reservations.reservationID); setrefresh(props.refresh===0? 1 : 0);}}
+                                    >Retur to Main Shelf
+                                </Button>
                             </Col>
                         </Row>
                     </Col>

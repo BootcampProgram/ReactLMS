@@ -9,6 +9,9 @@ function Reservation() {
   //State
   const [parentReservationStatus, setParentReservationStatus] = useState("");
   const [parentShelve, setParentShelve] = useState("");
+  const [refresh, setRefresh] = useState(0);
+
+  console.log(refresh);
 
   //Method
   const onSelectStatus = (inputStatus) => {
@@ -26,7 +29,7 @@ function Reservation() {
         {/* <Searchbar search = {onSearch} placeholder = "Search By Reservations Attributes"/> */}
         <Reservationfilters onselectstatus={onSelectStatus} onselectshelve={onSelectShelve}/>
         <Container className="mt-4">
-          <ReservationContainer parentreservationstatus={parentReservationStatus} parentshelve={parentShelve}/>
+          <ReservationContainer parentreservationstatus={parentReservationStatus} parentshelve={parentShelve} setrefresh={setRefresh} refresh={refresh}/>
         </Container>
       </div>
     );

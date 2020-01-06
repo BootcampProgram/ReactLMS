@@ -50,7 +50,11 @@ function BlockModal({setrefresh, ...props}){
         <Container>
           <Row className="show-grid, text-right">
             <Col>
-              <Button variant="primary" className="mr-3" size="md" onClick={() => {successModal(true); blockStudent(); setrefresh(props.refresh===0? 1 : 0); setstudentId(props.studentid)}}>Yes</Button>
+              <Button 
+                variant="primary" className="mr-3" size="md" 
+                onClick={() => {successModal(true); blockStudent(); setrefresh(props.refresh===0? 1 : 0); setstudentId(props.studentid)}}
+                >Yes
+              </Button>
               <Button variant="secondary" size="md" onClick={props.onHide}>No</Button>
             </Col>
           </Row>
