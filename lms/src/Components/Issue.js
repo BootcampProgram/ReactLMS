@@ -16,8 +16,8 @@ function Issue(props) {
       <>
       <Container>
         <Row>
-          <Col md={{ span: 5}}>
-            <Searchbar search = {onSearch} placeholder = "Search By Student Attributes"/>
+          <Col>
+            <Searchbar search = {onSearch} placeholder = "Search For Student Reservations (By Student)"/>
           </Col>
         </Row>
       </Container>

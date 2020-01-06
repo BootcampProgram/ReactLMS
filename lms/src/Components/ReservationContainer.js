@@ -31,7 +31,6 @@ function ReservationsTable({setrefresh, refresh, ...props}) {
     }
 
     useEffect(() => {
-    
         fetch("https://localhost:44381/api/reservation")
         .then(res => res.json())
         .then(data => {
@@ -162,7 +161,7 @@ function ReservationsTable({setrefresh, refresh, ...props}) {
                                     variant="success" className="mr-4" size="sm"  
                                     disabled={Reservations.shelve === "Main"? false: true} 
                                     onClick={() => {addToSubShelve(Reservations.reservationID);}}
-                                    >Add to Sub Shelf {Reservations.reservationID}
+                                    >Add to Sub Shelf
                                 </Button>
                                 <Button 
                                     variant="danger" size="sm" 
