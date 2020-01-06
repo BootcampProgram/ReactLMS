@@ -11,6 +11,7 @@ function Catalog() {
   const [modalShow, setModalShow] = useState(false);
   const [booksTableList, setBooksTableList] = useState([]);
   const [isbnNumber, setIsbnNumber] = useState("");
+  const [refresh, setRefresh] = useState(0);
 
   //Methods
   const onSearch = (stringValue) => {
@@ -28,8 +29,8 @@ function Catalog() {
       <>
         <Searchbar search = {onSearch} placeholder = "Search by Book Details"/>
         <Button variant="primary" className="ml-4 my-3" onClick={() => setModalShow(true)}>Add New Book</Button>
-        <Booktable searchString={SearchString} setTableData={setTableData}/>
-        <AddNewBookModal show={modalShow} onHide={() => {setModalShow(false); setIsbnNumber("")}} bookstablelist={booksTableList} setisnumber={setisNumber} isbnnumber={isbnNumber}/>
+        <Booktable searchString={SearchString} setTableData={setTableData} refresh={refresh}/>
+        <AddNewBookModal show={modalShow} onHide={() => {setModalShow(false); setIsbnNumber("")}} bookstablelist={booksTableList} setisnumber={setisNumber} isbnnumber={isbnNumber} setrefresh={setRefresh} refresh={refresh}/>
       </>
     );
   }

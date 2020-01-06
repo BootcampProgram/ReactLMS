@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'; 
 import '../App.css';
 import {Button, Container, Row, Col, Form, Image } from 'react-bootstrap';
-import {Typeahead} from 'react-bootstrap-typeahead';
 
 function IssueReservations(props) {
 

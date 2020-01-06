@@ -5,7 +5,7 @@ import { FaEdit } from 'react-icons/fa';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import ViewBooksModal from './Modals/ViewBooksModal'
 
-function Booktable(props) {
+function Booktable({refresh, ...props}) {
 //States
 const [listBooks, setlistBooks] = useState([]);
 const [modalShow, setModalShow] = useState(false);
@@ -30,7 +30,7 @@ useEffect(() => {
     .then(data => {
         setlistBooks(data);
     })
-}, [])
+}, [refresh])
 
     return (
       <>

@@ -3,7 +3,7 @@ import '../../App.css';
 import ShowNewBookIdModal from './ShowNewBookIdModal'
 import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 
-function AddNewBookModal({setisnumber, ...props}) {
+function AddNewBookModal({setisnumber, setrefresh, ...props}) {
 
     const [newBookModalShow, setNewBookModalShow] = useState(false);
     const [generatedBookId, setGeneratedBookId] = useState(0);
@@ -76,7 +76,7 @@ function AddNewBookModal({setisnumber, ...props}) {
                                         <h5 className="my-auto">{c.title}</h5>
                                     </Col>
                                     <Col className="text-right my-auto pr-0">
-                                        <Button variant="success" size="sm" onClick={() => {props.onHide(); generateBookId(); setNewBookModalShow(true)}}>Generate Book Id</Button>
+                                        <Button variant="success" size="sm" onClick={() => {props.onHide(); generateBookId(); setrefresh(props.refresh===0? 1 : 0); setNewBookModalShow(true)}}>Generate Book Id</Button>
                                     </Col>
                                 </Row>)
                                 }
@@ -92,7 +92,7 @@ function AddNewBookModal({setisnumber, ...props}) {
                 <Button variant="dark" onClick={props.onHide}>Close</Button>
             </Modal.Footer>
             </Modal>
-            <ShowNewBookIdModal show={newBookModalShow} onHide={() => setNewBookModalShow(false)} generatedbookid={generatedBookId} />
+            <ShowNewBookIdModal show={newBookModalShow} onHide={() => {setNewBookModalShow(false); setrefresh(props.refresh===0? 1 : 0);}} generatedbookid={generatedBookId} />
         </>
     );
 }
