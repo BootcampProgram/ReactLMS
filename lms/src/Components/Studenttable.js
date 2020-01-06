@@ -33,7 +33,7 @@ function Studenttable(props) {
             setListStudents(data)
         })    
     },[refresh])
-
+    
     return(
         <>
         <Table striped bordered hover size="sm" className="mt-4 mx-auto" style={{width:"97%"}}> 
