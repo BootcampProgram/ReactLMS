@@ -11,8 +11,6 @@ function Reservation() {
   const [parentShelve, setParentShelve] = useState("");
   const [refresh, setRefresh] = useState(0);
 
-  console.log(refresh);
-
   //Method
   const onSelectStatus = (inputStatus) => {
     setParentReservationStatus(inputStatus);

@@ -3,7 +3,7 @@ import '../App.css';
 import { Container, Row, Col, Image, Form, Button} from 'react-bootstrap';
 import { IoMdClose } from 'react-icons/io';
 
-function ReservationsTable({setrefresh, ...props}) {
+function ReservationsTable({setrefresh, refresh, ...props}) {
     //States
     const [listReservations, setlistReservations] = useState([]);
 
@@ -35,9 +35,9 @@ function ReservationsTable({setrefresh, ...props}) {
         fetch("https://localhost:44381/api/reservation")
         .then(res => res.json())
         .then(data => {
-            setlistReservations(data)
+            setlistReservations(data);
         });
-    }, [])
+    }, [refresh])
 
 
     const addToMainShelve = (input) => {
@@ -50,8 +50,10 @@ function ReservationsTable({setrefresh, ...props}) {
         })
             .then(res => {
               if(res.status === 200){
+                setrefresh(refresh===0? 1 : 0);
                 return [];
               }else{
+                setrefresh(refresh===0? 1 : 0);
                 res.json();
               }})
             .catch(error => {
@@ -61,7 +63,6 @@ function ReservationsTable({setrefresh, ...props}) {
    
 
     const addToSubShelve = (input) => {
-        console.log("input: " + input);
         fetch(`https://localhost:44381/api/reservation/SubShelve/${input}`, {
             method: 'PUT',
             headers: {
@@ -71,13 +72,15 @@ function ReservationsTable({setrefresh, ...props}) {
         })
             .then(res => {
               if(res.status === 200){
+                setrefresh(refresh===0? 1 : 0);
                 return [];
               }else{
+                setrefresh(refresh===0? 1 : 0);
                 res.json();
               }})
             .catch(error => {
                 console.log(error)
-            })
+            });
     }
 
 
@@ -158,13 +161,13 @@ function ReservationsTable({setrefresh, ...props}) {
                                 <Button 
                                     variant="success" className="mr-4" size="sm"  
                                     disabled={Reservations.shelve === "Main"? false: true} 
-                                    onClick={() => {addToSubShelve(Reservations.reservationID); setrefresh(props.refresh===0? 1 : 0);}}
+                                    onClick={() => {addToSubShelve(Reservations.reservationID);}}
                                     >Add to Sub Shelf {Reservations.reservationID}
                                 </Button>
                                 <Button 
                                     variant="danger" size="sm" 
                                     disabled={Reservations.shelve === "Sub"? false: true} 
-                                    onClick={() => {addToMainShelve(Reservations.reservationID); setrefresh(props.refresh===0? 1 : 0);}}
+                                    onClick={() => {addToMainShelve(Reservations.reservationID);}}
                                     >Retur to Main Shelf
                                 </Button>
                             </Col>
