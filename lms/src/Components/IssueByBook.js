@@ -33,7 +33,7 @@ function IssueByBook(props) {
                     placeholder="Book Tittle"
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
-                    disabled="true"
+                    disabled={true}
                 />
           </Col>
           <Col className="my-4 w-75 mx-auto">
@@ -45,8 +45,8 @@ function IssueByBook(props) {
         <Row>
             <Col md={10}></Col>
             <Col className="mt-2">
-                <Button variant="outline-secondary" className="mr-3">Cancel</Button>
-                <Button variant="success">Issue</Button>
+                <Button variant="success" className="mr-3">Issue</Button>
+                <Button variant="outline-secondary">Cancel</Button>
             </Col>
         </Row>
       </Container>
