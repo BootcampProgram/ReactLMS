@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'; 
 import '../App.css';
-import { Container, Row, Col, Image, Form, Button} from 'react-bootstrap';
+import { Container, Row, Col, Image, Form, Button, Alert} from 'react-bootstrap';
 import { IoMdClose } from 'react-icons/io';
 
 function ReservationsTable({setrefresh, refresh, ...props}) {
@@ -171,13 +171,13 @@ function ReservationsTable({setrefresh, refresh, ...props}) {
                                     variant="success" className="mr-4" size="sm"  
                                     disabled={Reservations.shelve === "Main"? false: true} 
                                     onClick={() => {addToSubShelve(Reservations.reservationID);}}
-                                    >Add to Sub Shelf
+                                    >Add to Sub Shelve
                                 </Button>
                                 <Button 
                                     variant="danger" size="sm" 
                                     disabled={Reservations.shelve === "Sub"? false: true} 
                                     onClick={() => {addToMainShelve(Reservations.reservationID);}}
-                                    >Retur to Main Shelf
+                                    >Return to Main Shelf
                                 </Button>
                             </Col>
                         </Row>
@@ -185,7 +185,11 @@ function ReservationsTable({setrefresh, refresh, ...props}) {
                 </Row>
             </Container>
             )}
-            {filteredList.length===0 && <h3>No Filtered Reservations Found</h3>}
+            {filteredList.length===0 && 
+                <Alert variant="success" className="text-center">
+                    No Data Found For This Search
+                </Alert>
+            }
         </>
     );
 }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../App.css';
 import Searchbar from './Searchbar'
-import IssueReservations  from './IssueReservations'
+import IssueByReservations  from './IssueByReservations'
+import IssueByBook  from './IssueByBook'
 import { Container, Row, Col } from 'react-bootstrap';
 
 function Issue(props) {
@@ -22,7 +23,9 @@ function Issue(props) {
         </Row>
       </Container>
         
-        <IssueReservations searchString={searchString}/>
+      <IssueByReservations searchString={searchString}/>
+      <IssueByBook searchString={searchString}/>
+      
       </>
     );
   }

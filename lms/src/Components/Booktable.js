@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import '../App.css';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Alert } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import ViewBooksModal from './Modals/ViewBooksModal'
@@ -24,7 +24,6 @@ const onBookView = useCallback((input) => {
 },[])
 
 useEffect(() => {
-
     fetch("https://localhost:44381/api/book")
     .then(res => res.json())
     .then(data => {
@@ -67,7 +66,11 @@ useEffect(() => {
                     )}
             </tbody>
         </Table>
-        {filteredBooks.length === 0 && <h3 className="text-center">Data not Found</h3>}
+        {filteredBooks.length === 0 && 
+            <Alert variant="success" className="text-center m-4">
+                No Data Found For This Search
+            </Alert>
+        }
         <ViewBooksModal show={modalShow} onHide={() => {setModalShow(false); setBookDetail([]); setbookid("");}} bookid={bookid} bookview={onBookView} bookdetail={bookDetail}/>
       </>
     );
