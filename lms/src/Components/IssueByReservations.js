@@ -120,6 +120,7 @@ function IssueByReservations(props) {
           </Row>
             )}
             {searchReservations.length===0 && 
+            //  <Col><Alert variant="danger" className="text-center">No Reservations Found...</Alert></Col>
               <p className="text-center mx-auto my-auto" style={{color:"grey", fontSize:"20px"}}>No Reservations Found...</p>
             }
           </Row>
