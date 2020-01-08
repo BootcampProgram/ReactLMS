@@ -4,13 +4,17 @@ import { Table, Button, Alert } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import ViewBooksModal from './Modals/ViewBooksModal'
+import DeleteBookConfirmationModal from './Modals/DeleteBookConfirmationModal'
 
 function Booktable({refresh, ...props}) {
 //States
 const [listBooks, setlistBooks] = useState([]);
 const [modalShow, setModalShow] = useState(false);
 const [bookid, setbookid] = useState("");
-const [bookDetail, setBookDetail] = useState([])
+const [bookDetail, setBookDetail] = useState([]);
+const [deleteModalShow, setDeleteModalShow] = useState(false);
+const [selectedDeleteBookId, setSelectedDeleteBookId] = useState("");
+const [refreshTable, setRefreshTable] = useState(0)
 
 //Filter books on search string
 var filteredBooks = listBooks.filter(c => 
@@ -29,7 +33,7 @@ useEffect(() => {
     .then(data => {
         setlistBooks(data);
     })
-}, [refresh])
+}, [refresh, refreshTable])
 
     return (
       <>
@@ -60,7 +64,8 @@ useEffect(() => {
                     <td><Button variant="success" size="sm" onClick={() => {setModalShow(true); setbookid(y.detailID)}}>View</Button></td>
                     <td className="text-center">
                         <a href="#bookedit" className="mr-4 Black" title="Edit Book"><FaEdit /></a>
-                        <a href="#bookdelete" className="Black" title="Delete Book"><AiTwotoneDelete /></a>
+                        {/* <Button><AiTwotoneDelete /></Button> */}
+                        <a href="#" className="Black" title="Delete Book" onClick={() => {setDeleteModalShow(true); setSelectedDeleteBookId(y.detailID);}}><AiTwotoneDelete /></a>
                     </td>
                 </tr>
                     )}
@@ -72,6 +77,7 @@ useEffect(() => {
             </Alert>
         }
         <ViewBooksModal show={modalShow} onHide={() => {setModalShow(false); setBookDetail([]); setbookid("");}} bookid={bookid} bookview={onBookView} bookdetail={bookDetail}/>
+        <DeleteBookConfirmationModal show={deleteModalShow} onHide={() => setDeleteModalShow(false)} selecteddeletebookid={selectedDeleteBookId} setrefreshtable={setRefreshTable} refreshtable={refreshTable} bookdetail={bookDetail}/>
       </>
     );
   }

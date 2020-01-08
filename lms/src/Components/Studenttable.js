@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'; 
 import '../App.css';
-import { Table, Button} from 'react-bootstrap';
+import { Table, Button, Alert} from 'react-bootstrap';
 import ViewStudentBorrowingsModal from './Modals/ViewStudentBorrowingsModal'
 import ViewStudentDetailsModal from './Modals/ViewStudentDetailsModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
@@ -74,7 +74,10 @@ function Studenttable(props) {
                 )}
              </tbody>
         </Table>
-        {searchStudent.length===0 && <h3 className= "text-center">Data Not Found</h3>}
+        {searchStudent.length===0 && 
+        <Alert variant="success" className="text-center m-4">No Students Found For This Search</Alert>
+        // <h3 className= "text-center">Data Not Found</h3>
+        }
         <ViewStudentBorrowingsModal show={borrowingsModalShow} onHide={() => setBorrowingsModalShow(false)} studentid = {studentId}/>
         <ResetPasswordModal show={ResetPasswordModalShow} onHide={() => setResetPasswordModalShow(false)} studentid={studentId}/>
         <BlockModal show={BlockModalShow} onHide={() => setBlockModalShow(false)} studentid={studentId} setrefresh={setRefresh} refresh={refresh}/>

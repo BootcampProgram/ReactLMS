@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import '../../App.css';
 import ShowNewBookIdModal from './ShowNewBookIdModal'
+import AddNewBookDetailModal from './AddNewBookDetailModal'
 import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 
 function AddNewBookModal({setisnumber, setrefresh, ...props}) {
 
     const [newBookModalShow, setNewBookModalShow] = useState(false);
+    const [addNewBookModalShow, setAddNewBookModalShow] = useState(false);
     const [generatedBookId, setGeneratedBookId] = useState(0);
 
     var isBookFound = props.bookstablelist.filter(book => book.isbn === props.isbnnumber);
@@ -42,7 +44,6 @@ function AddNewBookModal({setisnumber, setrefresh, ...props}) {
     //     console.log("I'm in: " + bookDetailid);
         
     // }
-    console.log("id: " + generatedBookId)
     return(
         <>
             <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
@@ -88,11 +89,12 @@ function AddNewBookModal({setisnumber, setrefresh, ...props}) {
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Add New</Button>
+                <Button onClick={() => {setAddNewBookModalShow(true); props.onHide()}}>Add New</Button>
                 <Button variant="dark" onClick={props.onHide}>Close</Button>
             </Modal.Footer>
             </Modal>
             <ShowNewBookIdModal show={newBookModalShow} onHide={() => {setNewBookModalShow(false); setrefresh(props.refresh===0? 1 : 0);}} generatedbookid={generatedBookId} />
+            <AddNewBookDetailModal show={addNewBookModalShow} onHide={() => setAddNewBookModalShow(false)}/>
         </>
     );
 }
