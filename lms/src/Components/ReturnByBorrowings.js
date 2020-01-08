@@ -1,28 +1,20 @@
 import React, { useEffect, useState } from 'react'; 
 import '../App.css';
-import {Container, Row, Col, Form, Image, Alert } from 'react-bootstrap';
-import {IoIosCloseCircleOutline, IoIosCheckmarkCircleOutline} from "react-icons/io";
+import {Container, Row, Col, Form, Image, Alert, Button} from 'react-bootstrap';
 
-function IssueByReservations(props) {
+function ReturnByBorrowings(props) {
 
   const [listStudents, setListStudents] = useState([]);
-  const [listReservations, setListReservations] = useState([]);
+  const [listBorrowings, setListBorrowings] = useState([]);
 
   var searchStudent = listStudents.filter(student => `S00${student.studentId}`.toLowerCase() === props.searchString.toString().toLowerCase()
-    // student.fullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
   )
 
-  var searchReservations = listReservations.filter(reservation =>  `S00${reservation.studentId}`.toLowerCase() === props.searchString.toString().toLowerCase()
-    // reservation.studentFullName.toLowerCase().includes(props.searchString.toString().toLowerCase())
+  var searchBorrowings = listBorrowings.filter(borrowing =>  `S00${borrowing.studentId}`.toLowerCase() === props.searchString.toString().toLowerCase()
   )
 
-  console.log(listReservations);
-
-  // var searchReservations = listReservations.filter(book => 
-  //   book.bookID.toLowerCase().includes(props.searchString.toString().toLowerCase())
-  // )
       
-
+console.log(searchBorrowings);
   useEffect (() => {
     fetch("https://localhost:44381/api/student")
     .then(res => res.json())
@@ -30,10 +22,10 @@ function IssueByReservations(props) {
       setListStudents(data);
     });
 
-    fetch("https://localhost:44381/api/reservation")
+    fetch("https://localhost:44381/api/borrowing/all")
     .then(res => res.json())
     .then(data => {
-      setListReservations(data)
+      setListBorrowings(data)
     });
   },[])
 
@@ -42,7 +34,7 @@ function IssueByReservations(props) {
       <Container>
       {searchStudent.length !== 1 && 
         <Alert variant="success" className="text-center">
-          Search For Student Reservations By Student ID
+          Search For Student Borrowings By Student ID
         </Alert>
       } 
       {searchStudent.length === 1 && 
@@ -62,69 +54,61 @@ function IssueByReservations(props) {
      
           <Row>
             <p className="font-weight-bold mb-3 ml-4" style={{color:"green", fontSize:"20px"}}>
-            Reservations
+            Borrowings
             </p>
           </Row>
       
           <Row>
-            {searchReservations.map(Reservations =>
-            <Row className={"mt-3 mb-4 ml-4 shadow rounded my-auto " + (searchReservations.length === 2? 'mx-auto' : '')} key={Reservations.bookID} style={{backgroundColor:"#FAFAFA"}}>
+            {searchBorrowings.map(borrowing =>
+            <Row className={"mt-3 mb-4 ml-4 shadow rounded my-auto " + (searchBorrowings.length === 2? 'mx-auto' : '')} key={borrowing.bookID} style={{backgroundColor:"#FAFAFA"}}>
             {/* Image section */}
               <Col md={4}  className="my-auto">
-                <Image src={require(`../Coverimages/${Reservations.coverImage === undefined || Reservations.coverImage === null? 'Default.jpg' : Reservations.coverImage}`)} thumbnail style={{width:"100px"}}/>
+                <Image src={require(`../Coverimages/${borrowing.coverImage === undefined || borrowing.coverImage === null? 'Default.jpg' : borrowing.coverImage}`)} thumbnail style={{width:"100px"}}/>
               </Col>
 
               <Col md={6} >
                 <Row>
-                  <Form.Label className="font-weight-bold text-left" column>{`B00${Reservations.bookID}`}: {Reservations.title}</Form.Label>
+                  <Form.Label className="font-weight-bold text-left" column>{`B00${borrowing.bookID}`}: {borrowing.title}</Form.Label>
                 </Row>
                 <Row>
                   <Col className="text-left" md={3}><small>Author:</small></Col>
-                  <Col className="text-left"><small>{Reservations.author}</small></Col>
+                  <Col className="text-left"><small>{borrowing.author}</small></Col>
                 </Row>
                 <Row>
                   <Col className="text-left" md={3}><small>ISBN:</small></Col>
-                  <Col className="text-left"><small>{Reservations.isbn}</small></Col>
+                  <Col className="text-left"><small>{borrowing.isbn}</small></Col>
                 </Row>
                 <Row>
                   <Col className="text-left" md={3}><small>Genre:</small></Col>
-                  <Col className="text-left"><small>{Reservations.genre}</small></Col>
+                  <Col className="text-left"><small>{borrowing.genre}</small></Col>
                 </Row>
                 <Row>
                   <Col className="text-left" md={3}><small>Language:</small></Col>
-                  <Col className="text-left"><small>{Reservations.language}</small></Col>
+                  <Col className="text-left"><small>{borrowing.language}</small></Col>
                 </Row>
                 <Row className="pb-2">
                   <Col className="text-left" md={3}><small>Publisher:</small></Col>
-                  <Col className="text-left"><small>{Reservations.publisher}</small></Col>
+                  <Col className="text-left"><small>{borrowing.publisher}</small></Col>
                 </Row>        
                        
               </Col>
                     
               <Col md={2}>
                 <Row style={{margin:"60px 0 60px 0"}}></Row>
-                <Row>
-                  <IoIosCloseCircleOutline style={{color:"red"}} size={35}/>
-                  <IoIosCheckmarkCircleOutline className="p-0" style={{color:"green"}} size={35}/>
+                <Row className="mr-5">
+                  <Button variant="danger">Recieved</Button>
                 </Row>
               </Col>
                     
               <Col className="mr-5"></Col>
           </Row>
             )}
-            {searchReservations.length===0 && 
+            {searchBorrowings.length===0 && 
               <p className="text-center mx-auto my-auto" style={{color:"grey", fontSize:"20px"}}>No Reservations Found...</p>
             }
           </Row>
         </Container>
       }
-      </Container>
-      <Container>
-        <Row>
-          <p className="font-weight-bold mb-3 ml-4 mt-4" style={{color:"green", fontSize:"20px"}}>
-            Issue By Book ID
-          </p>
-        </Row>
       </Container>
 
       
@@ -132,4 +116,4 @@ function IssueByReservations(props) {
   );
 }
   
-export default IssueByReservations;
+export default ReturnByBorrowings;

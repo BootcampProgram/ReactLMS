@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import Searchbar from './Searchbar'
-import { Container, Row, Col, Button, InputGroup, FormControl} from 'react-bootstrap';
+import { Container, Row, Col, Button, InputGroup, FormControl, Alert} from 'react-bootstrap';
 import {IoMdAdd} from "react-icons/io";
 
 function IssueByBook(props) {
@@ -14,12 +14,28 @@ function IssueByBook(props) {
   const onSearch = (inputValue) => {
     setSearchString(inputValue)
   }
+
+  const [listBooks, setListBooks] = useState([]);
+
+  var searchBooks = listBooks.filter(book =>  `S00${book.studentId}`.toLowerCase() === props.searchString.toString().toLowerCase()
+  )
+
+  console.log(listBooks);
+
+  useEffect (() => {
+    fetch("https://localhost:44381/api/book")
+    .then(res => res.json())
+    .then(data => {
+      setListBooks(data)
+    });
+  },[])
+
     return (
       <>
       <Container>
-        <Row>
+        <Row className=" ml-5">
           <Col md={4}>
-            <InputGroup className="my-4 w-75 mx-auto">
+            <InputGroup className="my-4 mx-auto">
                 <FormControl
                     placeholder="Search By Book ID"
                     aria-label="Recipient's username"
@@ -50,6 +66,8 @@ function IssueByBook(props) {
             </Col>
         </Row>
       </Container>
+
+      
       
       </>
     );
